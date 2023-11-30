@@ -4,6 +4,29 @@
 //use an undirected graph G with vertices representing movies and actors. Edges will reflect the relationship 
 //“actor played role in movie”. Every actor A that played in a movie M will result in an undirected edge
 //*********************************************************************************************************
+
+try{
+            Scanner scan = new Scanner (new File(fName));
+             while(scan.hasNextLine()){
+                String word = scan.next();
+                if (vertices.contains(word)){ //if movie is in vertex
+                    num = vertices.indexOf(word); // find index in arraylist
+                    //add to linked list in array list
+                }else // if movie not in vertex
+                {    }
+                //get next token for name
+                if(){}//if name is in vertex
+                else{}//if name is not in vertex
+                
+    
+                vertices.addVertex(word);
+            }
+        }catch(IOException ex){
+            System.out.println(ex);
+        }
+
+
+
 public class HollywoodGraph<T> implements Graph<T> {
 
   private ArrayList<T> vertices;
