@@ -11,35 +11,43 @@
 
 public class HollywoodGraph<T> implements Graph<T> {
 
-  private ArrayList<T> vertices;
-  private ArrayList<LinkedList<T>> edges;
-  
-  public HollywoodGraph<T>() {
-    vertices = new ArrayList<T>();
-    edges = new ArrayList<LinkedList<T>>();
-  }
-
-public HollywoodGraph<String> HollywoodGraphFromFile(String fileName){
-      try{
-            Scanner scan = new Scanner (new File(fName));
-             while(scan.hasNextLine()){
-                String word = scan.next();
-                if (vertices.contains(word)){ //if movie is in vertex
-                    num = vertices.indexOf(word); // find index in arraylist
-                    //add to linked list in array list
-                }else // if movie not in vertex
-                {    }
-                //get next token for name
-                if(){}//if name is in vertex
-                else{}//if name is not in vertex
-                
+    private ArrayList<T> names;
+    private AdjListsGraph<]<T> adj;
     
-                vertices.addVertex(word);
+    public HollywoodGraph(){
+        names = new ArrayList<String>();
+        adj = new AdjListsGraph<]<T>();
+    }
+    
+    public void graphBuilder(String fName){
+        try{
+            Scanner scan = new Scanner (new File(fName)).useDelimiter(",");
+             while(scan.hasNextLine()){
+                String movie = scan.next();
+                String actor = scan.next();
+                if (names.contains(movie)){ //if movie is in vertex
+                    // find index in arraylist
+                    //add to linked list in array list
+                    adj.addVertex(movie);
+                }else // if movie not in vertex
+                {   names.add(movie);
+                    adj.addVertex(movie);
+                }
+                //get next token for name
+                if(names.contains(actor)){//if name is in vertex
+                    adj.addVertex(actor);
+                }
+                else{
+                    names.add(actor);
+                    adj.addVertex(actor);
+                }//if name is not in vertex
+                adj.addEdge(movie,actor);
             }
         }catch(IOException ex){
             System.out.println(ex);
         }
-  }
+        scan.close();
+    }
 
   /** Returns true if this graph is empty, false otherwise. */
    public boolean isEmpty();
