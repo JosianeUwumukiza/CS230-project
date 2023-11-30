@@ -5,7 +5,22 @@
 //“actor played role in movie”. Every actor A that played in a movie M will result in an undirected edge
 //*********************************************************************************************************
 
-try{
+
+
+
+
+public class HollywoodGraph<T> implements Graph<T> {
+
+  private ArrayList<T> vertices;
+  private ArrayList<LinkedList<T>> edges;
+  
+  public HollywoodGraph<T>() {
+    vertices = new ArrayList<T>();
+    edges = new ArrayList<LinkedList<T>>();
+  }
+
+public HollywoodGraph<String> HollywoodGraphFromFile(String fileName){
+      try{
             Scanner scan = new Scanner (new File(fName));
              while(scan.hasNextLine()){
                 String word = scan.next();
@@ -24,18 +39,8 @@ try{
         }catch(IOException ex){
             System.out.println(ex);
         }
-
-
-
-public class HollywoodGraph<T> implements Graph<T> {
-
-  private ArrayList<T> vertices;
-  private ArrayList<LinkedList<T>> edges;
-  
-  public HollywoodGraph<T> {
-    vertices = new ArrayList<T>();
-    edges = new ArrayList<LinkedList<T>>();
   }
+
   /** Returns true if this graph is empty, false otherwise. */
    public boolean isEmpty();
 
