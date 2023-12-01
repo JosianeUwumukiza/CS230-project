@@ -27,10 +27,10 @@ public class HollywoodGraph<T> { //implements Graph<T> {
             String titles = scan.nextLine();
             
              while(scan.hasNextLine()){
-                String movie = scan.next();
-                System.out.println(movie);
-                String actor = scan.next();
-                System.out.println(actor);
+                String movie = scan.next().replace("\"", "");
+                //System.out.println(movie);
+                String actor = scan.next().replace("\"", "");
+                //System.out.println(actor);
                 if (names.contains(movie)){ //if movie is in vertex
                     // find index in arraylist
                     //add to linked list in array list
@@ -48,7 +48,7 @@ public class HollywoodGraph<T> { //implements Graph<T> {
                     adj.addVertex(actor);
                 }//if name is not in vertex
                 adj.addEdge(movie,actor);
-                //scan.nextLine();
+                scan.nextLine();
             }
             scan.close();
         }catch(IOException ex){
@@ -64,6 +64,7 @@ public class HollywoodGraph<T> { //implements Graph<T> {
     public static void main(String[] args){
         HollywoodGraph<String> hollywood = new HollywoodGraph<String>();
         
+        //hollywood.graphBuilder("nextBechdel_castGender.txt");
         hollywood.graphBuilder("small_castGender.txt");
         System.out.println(hollywood.toString());
     }
