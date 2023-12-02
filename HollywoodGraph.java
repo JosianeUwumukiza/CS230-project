@@ -23,11 +23,19 @@ public class HollywoodGraph<T> {
     private ArrayList<String> names;
     private AdjListsGraph<String> adj;
 
+    /**
+     * Constructor for class HollywoodGraph
+     */
     public HollywoodGraph(){
         names = new ArrayList<String>();
         adj = new AdjListsGraph<String>();
     }
-
+    
+    /**
+     * Creates a graph from the input file
+     * 
+     * @param  fName  the name of the file to turn into a graph
+     */
     public void graphBuilder(String fName){
         try{
             Scanner scan = new Scanner (new File(fName)).useDelimiter(",");
@@ -65,62 +73,109 @@ public class HollywoodGraph<T> {
 
     }
 
-    /** Returns true if this graph is empty, false otherwise. */
+    /** 
+     * Checks if the graph has any vertices
+     * 
+     * @return  true if this graph is empty, false otherwise.  
+     */
     public boolean isEmpty(){
         return adj.isEmpty();
     }
 
-    /** Returns the number of vertices in this graph. */
+    /** 
+     * Gets the number of vertices in the graph
+     * 
+     * @return the number of vertices in this graph. 
+     */
     public int getNumVertices(){
         return adj.getNumVertices();
     }
 
-    /** Returns true iff an edge exists between two given vertices
-     * which means that two corresponding arcs exist in the graph */
+    /** 
+     * Checks if there is an edge between two vertices
+     * 
+     * @param  vertex1  the name of the first vertex to check
+     * @param  vertex2  the name of the second vertex to check
+     * 
+     * @return  true if an edge exists between two given vertices
+     *          which means that two corresponding arcs exist in the graph 
+     *          and false otherwise
+     */
     public boolean isEdge (String vertex1, String vertex2){
         return adj.isEdge(vertex1, vertex2);
     }
 
-    /** Adds a vertex to this graph, associating object with vertex.
-     * If the vertex already exists, nothing is inserted. */
+    /** 
+     * Adds a vertex to this graph, associating object with vertex.
+     * If the vertex already exists, nothing is inserted.
+     * 
+     * @param  vertex  the name of the vertex to be added
+     */
     public void addVertex (String vertex){
         adj.addVertex(vertex);
     }
 
-    /** Removes a single vertex with the given value from this graph.
-     * If the vertex does not exist, it does not change the graph. */
+    /** 
+     * Removes a single vertex with the given value from this graph.
+     * If the vertex does not exist, it does not change the graph.
+     * 
+     * @param  vertex  the name of the vertex to be removed
+     */
     public void removeVertex (String vertex){
         adj.removeVertex(vertex);
     }
 
-    /** Inserts an edge between two vertices of this graph,
-     * if the vertices exist. Else does not change the graph. */
+    /** 
+     * Inserts an edge between two vertices of this graph, if the vertices 
+     * exist. Else does not change the graph. 
+     * 
+     * @param  vertex1  the name of the first vertex to add an edge to
+     * @param  vertex2  the name of the second vertex to add an edge to
+     */
     public void addEdge (String vertex1, String vertex2){
         adj.addEdge(vertex1, vertex2);
     }
 
-    /** Removes an edge between two vertices of this graph,
-    if the vertices exist, else does not change the graph. */
+    /** 
+     * Removes an edge between two vertices of this graph, if the vertices 
+     * exist, else does not change the graph.
+     * 
+     * @param  vertex1  the name of the first vertex to remove an edge from
+     * @param  vertex2  the name of the second vertex to remove an edge from
+     */
     public void removeEdge (String vertex1, String vertex2){
         adj.removeEdge(vertex1, vertex2);
     }
 
-    /** Saves the current graph into a .tgf file.
-    If it cannot write the file, a message is printed. */
+    /** 
+     * Saves the current graph into a .tgf file. If it cannot write the file, 
+     * a message is printed. 
+     * 
+     * @param  tgf_file_name  the name of the tgf file that will be created
+     */
     public void saveTGF(String tgf_file_name){
         adj.saveTGF(tgf_file_name);
     }
     
+    /**
+     * Creates a string version of the graph
+     * 
+     * @return  the String version of the graph
+     */
     public String toString(){
         return adj.toString();
     }
 
+    /**
+     * main runner for class HollywoodGraph
+     */
     public static void main(String[] args){
         HollywoodGraph<String> hollywood = new HollywoodGraph<String>();
 
         hollywood.graphBuilder("nextBechdel_castGender.txt");
         //hollywood.graphBuilder("small_castGender.txt");
         System.out.println(hollywood.toString());
+        hollywood.saveTGF("HollywoodGraph.tgf");
     }
 
 }
