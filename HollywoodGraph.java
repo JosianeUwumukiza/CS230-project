@@ -1,7 +1,7 @@
 
 /**
- * Write a description of class HollywoodGraph here.
- *
+ *The HollywoodGraph class reads a file containing movies and actors and creates an undirected graph that represents 
+ *which actors are in which movies and vice-versa. It also provides several methods to access information from the graph.
  * @author Aubrey, Josiane, Lauren
  * @version 12/1/23
  */
