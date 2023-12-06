@@ -1,0 +1,60 @@
+
+/**
+ * Write a description of class Actor here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class Actor
+{
+    private String gender; 
+    private String name;
+    
+    /**
+     * Constructor for objects of class Actor
+     */
+    public Actor(String name, String gender)
+    {
+        this.gender = gender;
+        this.name = name;
+    }
+    
+    /**
+     * Returns name of actor
+     *
+     * 
+     * @return  String, name of actor
+     */
+    public String getName()
+    {
+        return name;
+    }
+    
+    
+
+    /**
+     * Returns int based on gender of actor: 0=male, 1=female, 2=other
+     *
+     * 
+     * @return   int, num of gender of actor 
+     */
+    public String getGender()
+    {
+        return gender;
+    }
+    
+    /**
+     * Returns boolean based on if actor is femaile
+     *
+     * 
+     * @return   boolean, num of gender of actorif actor is female
+    */
+    public boolean isFemale()
+    {
+        return gender.equals("Female");
+    }
+    
+    
+    
+    
+}
