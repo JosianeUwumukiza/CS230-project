@@ -1,0 +1,121 @@
+import java.util.ArrayList;
+
+/**
+ * Write a description of class Movie here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class Movie
+{
+    private String title;
+    private ArrayList<Actor> actors;
+    private int count;
+    
+ 
+    /**
+     * Constructor for objects of class Movie
+     */
+    public Movie(String title)
+    {
+        this.title = title;
+        actors = new ArrayList<Actor>();
+        count = 0;
+    }
+
+    /**
+     * Method to add actor to arrayList
+     *
+     * @param  Actor, an object of an actor in the movie
+     * 
+     */
+    public void addActor(Actor a)
+    {
+        actors.add(a);
+        count ++;
+    }
+    
+    /**
+     * Method to add actor to arrayList
+     *
+     * 
+     * @return  int, count of total actors
+     */
+    public int numOfActors()
+    {
+        return count;
+    }
+    
+    /**
+     * Method to return num of female actors 
+     *
+     * 
+     * @return   int, number of female actors 
+     */
+    public int fActors()
+    {
+        int num = 0;
+        for (int i=0; i < count; i++){
+            if (actors.get(i).isFemale()){
+                num ++;
+                System.out.println(actors.get(i).getName());
+            }
+        }
+        System.out.println("f actors" + num);
+        System.out.println("count " + count);
+        return num;
+    }
+    
+        /**
+     * Method to return name of movie
+     *
+     * 
+     * @return   string, name of movie
+     */
+    public String getName()
+    {
+        return title;
+    }
+
+    /**
+     * Method to get female to actor ratio
+     * true if ratio of female actors greater than 48%
+     *
+     * 
+     * @return boolean, if female actors > 0.48
+     */
+    public boolean ratio()
+    {
+        int ratio;
+        ratio = fActors() / count;
+        System.out.println("ratio: "+ratio);
+        return ratio > 0.48;
+        }
+        
+    /**
+     * Method to get string version of array list
+     *
+     * 
+     * @return String, layout of arraylist
+     */
+    public String toString()
+    {
+        String s = "Actors in " + title + " : \n";
+        for (int i = 0; i < count; i++){
+            s += actors.get(i).getName() + " " + actors.get(i).getGender() + "\n";
+        }
+        return s;
+        }
+    
+        
+    public static void main(String[] args){
+        Movie m = new Movie("a");
+        Actor b = new Actor("b","Male");
+        m.addActor(b);
+        m.addActor(b);
+        m.addActor(b);
+        
+        System.out.println(m.ratio());
+        
+    }
+}
