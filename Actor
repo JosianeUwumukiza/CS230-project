@@ -25,12 +25,10 @@ public class Actor
      * 
      * @return  String, name of actor
      */
-    public String getName()
+    public String getActorName()
     {
         return name;
     }
-    
-    
 
     /**
      * Returns int based on gender of actor: 0=male, 1=female, 2=other
@@ -54,7 +52,16 @@ public class Actor
         return gender.equals("Female");
     }
     
-    
+    public static void main(String[] args){
+        Actor a = new Actor("a","Female");
+        Actor b = new Actor("b","Male");
+        
+        System.out.println(a.isFemale());
+        System.out.println(a.getGender());
+        
+        System.out.println(b.isFemale());
+        System.out.println(b.getGender());
+    }
     
     
 }
