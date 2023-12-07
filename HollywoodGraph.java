@@ -1,7 +1,7 @@
 
 /**
- * The HollywoodGraph class reads a file containing movies and actors and creates an undirected graph that represents 
- * which actors are in which movies and vice-versa. It also provides several methods to access information from the graph.
+ *The HollywoodGraph class reads a file containing movies and actors and creates an undirected graph that represents 
+ *which actors are in which movies and vice-versa. It also provides several methods to access information from the graph.
  * @author Aubrey, Josiane, Lauren
  * @version 12/1/23
  */
@@ -76,7 +76,7 @@ public class HollywoodGraph<T> {
                 Actor a = new Actor(actor,gender);
 
                 for (int i = 0; i < movies.size(); i++){
-                    if (movies.get(i).getName().equals(movie)){
+                    if (movies.get(i).getMovieName().equals(movie)){
                         movies.get(i).addActor(a);
                     }
                 } 
@@ -98,8 +98,7 @@ public class HollywoodGraph<T> {
         boolean answer = false;
         for (int i = 0; i < movies.size(); i++){
             //System.out.println(movies.get(i).getName());
-            if (movies.get(i).getName().equals(movieName)){
-                //System.out.println("selected movie: " + movies.get(i).getName());
+            if (movies.get(i).getMovieName().equals(movieName)){
                 answer = movies.get(i).ratio();
             }
         } 
