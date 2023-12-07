@@ -154,7 +154,23 @@ public class HollywoodGraph<T> {
     public void saveTGF(String tgf_file_name){
         adj.saveTGF(tgf_file_name);
     }
+    
+    /**
+     * Given a movie, prints out all the actors in that movie
+     * 
+     * @param  m  the title of the movie
+     */
+    public void getActors(String m) {
 
+        for (int i = 0; i < movies.size(); i++){
+            //System.out.println(movies.get(i).getName());
+            if (movies.get(i).getName().equals(m)){
+                //System.out.println("selected movie: " + movies.get(i).getName());
+                System.out.println(movies.get(i).toString());
+            }
+        } 
+    }
+    
     public static void main(String[] args){
         HollywoodGraph<String> hollywood = new HollywoodGraph<String>();
 
@@ -162,7 +178,7 @@ public class HollywoodGraph<T> {
         hollywood.graphBuilder("small_castGender.txt");
         //System.out.println(hollywood.toString());
         System.out.println(hollywood.genderAnalysis("Alpha")); //false
-
+        //hollywood.getActors("Alpha");
 
         //hollywood.saveTGF("HollywoodGraph.tgf");
     }
