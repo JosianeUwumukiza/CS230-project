@@ -10,7 +10,8 @@ public class Movie
 {
     private String title;
     private ArrayList<Actor> actors;
-    private int count;
+    private double count;
+    private double fcount;
     
  
     /**
@@ -21,6 +22,7 @@ public class Movie
         this.title = title;
         actors = new ArrayList<Actor>();
         count = 0;
+        fcount = 0;
     }
 
     /**
@@ -33,6 +35,9 @@ public class Movie
     {
         actors.add(a);
         count ++;
+        if (a.isFemale()){
+            fcount++;
+        }
     }
     
     /**
@@ -41,7 +46,7 @@ public class Movie
      * 
      * @return  int, count of total actors
      */
-    public int numOfActors()
+    public double numOfActors()
     {
         return count;
     }
@@ -52,17 +57,15 @@ public class Movie
      * 
      * @return   int, number of female actors 
      */
-    public int fActors()
+    public double fActors()
     {
         int num = 0;
-        for (int i=0; i < count; i++){
-            if (actors.get(i).isFemale()){
+        
+        for (Actor a : actors){
+            if (a.isFemale()){
                 num ++;
-                System.out.println(actors.get(i).getName());
             }
         }
-        System.out.println("f actors" + num);
-        System.out.println("count " + count);
         return num;
     }
     
@@ -72,7 +75,7 @@ public class Movie
      * 
      * @return   string, name of movie
      */
-    public String getName()
+    public String getMovieName()
     {
         return title;
     }
@@ -86,7 +89,7 @@ public class Movie
      */
     public boolean ratio()
     {
-        int ratio;
+        double ratio;
         ratio = fActors() / count;
         System.out.println("ratio: "+ratio);
         return ratio > 0.48;
@@ -102,18 +105,29 @@ public class Movie
     {
         String s = "Actors in " + title + " : \n";
         for (int i = 0; i < count; i++){
-            s += actors.get(i).getName() + " " + actors.get(i).getGender() + "\n";
+            s += actors.get(i).getActorName() + " " + actors.get(i).getGender() + "\n";
         }
         return s;
         }
     
+    public boolean equals(String m){
+        return m == title;
+    }
         
+    public double size(){
+        return count;
+    }
     public static void main(String[] args){
         Movie m = new Movie("a");
         Actor b = new Actor("b","Male");
         m.addActor(b);
         m.addActor(b);
         m.addActor(b);
+        Actor a = new Actor("a","Female");
+        m.addActor(a);
+        m.addActor(a);
+        m.addActor(a);
+        m.addActor(a);
         
         System.out.println(m.ratio());
         
