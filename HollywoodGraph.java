@@ -37,6 +37,7 @@ public class HollywoodGraph<T> {
             String titles = scan.nextLine();
 
             while(scan.hasNextLine()){
+                scan.useDelimiter(",");
                 String movie = scan.next().replace("\"", "");
                 //System.out.println(movie);
                 String actor = scan.next().replace("\"", "");
@@ -53,9 +54,11 @@ public class HollywoodGraph<T> {
                     //create new movie object
                     Movie m = new Movie(movie);
                     movies.add(m);
+                    //System.out.println("Movie Added to Movies: " + movie);
                     //find way to create indiv titles for each movie
                     //if necessary
                 }
+                //System.out.println("List of Movies in movies: " + movies.toString());
                 //get next token for name
                 adj.addVertex(actor);
                 if(!names.contains(actor)){//if name is in vertex
@@ -67,8 +70,9 @@ public class HollywoodGraph<T> {
                 scan.next();
                 scan.next();
                 scan.next();
-                String gender = scan.next().replace("\"", "");
-                System.out.println("name"+ actor + " gender: " + gender);
+                scan.useDelimiter("\n");
+                String gender = scan.next().replace("\"", "").replace(",", "");
+                //System.out.println("name"+ actor + " gender: " + gender);
                 Actor a = new Actor(actor,gender);
 
                 for (int i = 0; i < movies.size(); i++){
@@ -93,9 +97,9 @@ public class HollywoodGraph<T> {
         //return movies.get(index).ratio();
         boolean answer = false;
         for (int i = 0; i < movies.size(); i++){
-            System.out.println(movies.get(i).getName());
+            //System.out.println(movies.get(i).getName());
             if (movies.get(i).getName().equals(movieName)){
-                System.out.println("selected movie: " + movies.get(i).getName());
+                //System.out.println("selected movie: " + movies.get(i).getName());
                 answer = movies.get(i).ratio();
             }
         } 
