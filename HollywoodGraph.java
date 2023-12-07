@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 //use an undirected graph G with vertices representing movies and actors. Edges will reflect the relationship 
 //“actor played role in movie”. Every actor A that played in a movie M will result in an undirected edge
 //*********************************************************************************************************
-public class HollywoodGraph<T> { //implements Graph<T> {
+public class HollywoodGraph<T> {
 
     private ArrayList<String> names;
     private AdjListsGraph<String> adj;
@@ -70,7 +70,7 @@ public class HollywoodGraph<T> { //implements Graph<T> {
                 String gender = scan.next().replace("\"", "");
                 System.out.println("name"+ actor + " gender: " + gender);
                 Actor a = new Actor(actor,gender);
-                
+
                 for (int i = 0; i < movies.size(); i++){
                     if (movies.get(i).getName().equals(movie)){
                         movies.get(i).addActor(a);
@@ -84,7 +84,7 @@ public class HollywoodGraph<T> { //implements Graph<T> {
         }catch(IOException ex){
             System.out.println(ex);
         }
-        System.out.println(m.toString());
+        //System.out.println(m.toString());
     }
 
     public boolean genderAnalysis(String movieName){
@@ -116,18 +116,6 @@ public class HollywoodGraph<T> { //implements Graph<T> {
         return adj.getNumVertices();
     }
 
-    /** Returns the number of arcs in this graph. */
-    public int getNumArcs(){
-        System.out.println("There are no arcs in this graph, sorry!");
-        return -1;
-    }
-
-    /** Returns true iff a directed edge exists b/w given vertices */
-    public boolean isArc (String vertex1, String vertex2){
-        System.out.println("There are no arcs in this graph, sorry!");
-        return false;
-    }
-
     /** Returns true iff an edge exists between two given vertices
      * which means that two corresponding arcs exist in the graph */
     public boolean isEdge (String vertex1, String vertex2){
@@ -144,18 +132,6 @@ public class HollywoodGraph<T> { //implements Graph<T> {
      * If the vertex does not exist, it does not change the graph. */
     public void removeVertex (String vertex){
         adj.removeVertex(vertex);
-    }
-
-    /** Inserts an arc between two vertices of this graph,
-     * if the vertices exist. Else it does not change the graph. */
-    public void addArc (String vertex1, String vertex2){
-        System.out.println("There are no arcs in this graph, sorry!");
-    }
-
-    /** Removes an arc between two vertices of this graph,
-     * if the vertices exist. Else it does not change the graph. */
-    public void removeArc (String vertex1, String vertex2){
-        System.out.println("There are no arcs in this graph, sorry!");
     }
 
     /** Inserts an edge between two vertices of this graph,
@@ -183,8 +159,7 @@ public class HollywoodGraph<T> { //implements Graph<T> {
         hollywood.graphBuilder("small_castGender.txt");
         //System.out.println(hollywood.toString());
         System.out.println(hollywood.genderAnalysis("Alpha")); //false
-        
-        
+
 
         //hollywood.saveTGF("HollywoodGraph.tgf");
     }
