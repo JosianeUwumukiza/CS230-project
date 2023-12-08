@@ -23,11 +23,13 @@ public class HollywoodGraph<T> {
     private ArrayList<String> names;
     private AdjListsGraph<String> adj;
     private ArrayList<Movie> movies; //holds genders, create movie class
+    private ArrayList<Actor> actors;
 
     public HollywoodGraph(){
         names = new ArrayList<String>();
         adj = new AdjListsGraph<String>();
         movies = new ArrayList<Movie>();
+        actors = new ArrayList<Actor>();
     }
 
     public void graphBuilder(String fName){
@@ -61,10 +63,7 @@ public class HollywoodGraph<T> {
                 //System.out.println("List of Movies in movies: " + movies.toString());
                 //get next token for name
                 adj.addVertex(actor);
-                if(!names.contains(actor)){//if name is in vertex
-                    names.add(actor);
-                }
-
+                
                 //adding actor to movie arraylist object
                 //Movie m = new Movie(movie);
                 scan.next();
@@ -72,9 +71,27 @@ public class HollywoodGraph<T> {
                 scan.next();
                 scan.useDelimiter("\n");
                 String gender = scan.next().replace("\"", "").replace(",", "");
-                //System.out.println("name"+ actor + " gender: " + gender);
+                
                 Actor a = new Actor(actor,gender);
+                
+                
+                if(!names.contains(actor)){//if name is in vertex
+                    names.add(actor);
+                    actors.add(a);
+                }
 
+                //System.out.println("name"+ actor + " gender: " + gender);
+                
+                //adds movies to actor objects in arraylist 
+                for (int i = 0; i < actors.size(); i++){
+                    if (actors.get(i).getActorName().equals(actor)){
+                        actors.get(i).addMovies(movie);
+                        //System.out.println(actor);
+                        //System.out.println(movie);
+                    }
+                }
+                
+                //adds actors to movie objects in arraylist 
                 for (int i = 0; i < movies.size(); i++){
                     if (movies.get(i).getMovieName().equals(movie)){
                         movies.get(i).addActor(a);
@@ -88,7 +105,6 @@ public class HollywoodGraph<T> {
         }catch(IOException ex){
             System.out.println(ex);
         }
-        //System.out.println(m.toString());
     }
 
     public boolean genderAnalysis(String movieName){
@@ -103,6 +119,28 @@ public class HollywoodGraph<T> {
             }
         } 
         return answer;
+    }
+    
+    public String getMovies(String a){
+        String s = "";
+        for (int i = 0; i < actors.size(); i++){
+            //System.out.println(movies.get(i).getName());
+            if (actors.get(i).getActorName().equals(a)){
+                //System.out.println("selected movie: " + movies.get(i).getName());
+                s = actors.get(i).toString();
+            }
+        } 
+        return s;
+    }
+    
+    public void getActors(String m) {
+        for (int i = 0; i < movies.size(); i++){
+            //System.out.println(movies.get(i).getName());
+            if (movies.get(i).getMovieName().equals(m)){
+                //System.out.println("selected movie: " + movies.get(i).getName());
+                System.out.println(movies.get(i).toString());
+            }
+        } 
     }
 
     public String toString(){
@@ -154,17 +192,6 @@ public class HollywoodGraph<T> {
     public void saveTGF(String tgf_file_name){
         adj.saveTGF(tgf_file_name);
     }
-
-    public void getActors(String m) {
-
-        for (int i = 0; i < movies.size(); i++){
-            //System.out.println(movies.get(i).getName());
-            if (movies.get(i).getMovieName().equals(m)){
-                //System.out.println("selected movie: " + movies.get(i).getName());
-                System.out.println(movies.get(i).toString());
-            }
-        } 
-    }
     
     public static void main(String[] args){
         HollywoodGraph<String> hollywood = new HollywoodGraph<String>();
@@ -172,7 +199,7 @@ public class HollywoodGraph<T> {
         //hollywood.graphBuilder("nextBechdel_castGender.txt");
         hollywood.graphBuilder("small_castGender.txt");
         //System.out.println(hollywood.toString());
-        System.out.println(hollywood.genderAnalysis("Alpha")); //false
+        System.out.println(hollywood.getMovies(("Tyler Perry")));
 
 
         //hollywood.saveTGF("HollywoodGraph.tgf");
