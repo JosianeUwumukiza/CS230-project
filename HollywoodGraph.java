@@ -142,6 +142,40 @@ public class HollywoodGraph<T> {
             }
         } 
     }
+    
+    public boolean indexIsValid(int m){
+        return m < actors.size();
+    }
+    
+    public ArrayIterator iteratorBFS(int startIndex)
+    {
+        int currentVertex;
+        LinkedQueue<Integer> traversalQueue = new
+            LinkedQueue<Integer>();
+        ArrayIterator<String> iter = new ArrayIterator<String>();
+        if (!indexIsValid(startIndex))
+            return iter;
+        boolean[] visited = new boolean[names.size()];
+        for (int vertexIndex = 0; vertexIndex < names.size();
+        vertexIndex++)
+            visited[vertexIndex] = false;
+        traversalQueue.enqueue(startIndex);
+        visited[startIndex] = true;
+        while (!traversalQueue.isEmpty())
+        {
+            currentVertex = traversalQueue.dequeue();
+            iter.add(names[currentVertex]);
+            for (int vertexIndex = 0; vertexIndex < names.size();
+            vertexIndex++)
+                if (adj[currentVertex][vertexIndex] &&
+                !visited[vertexIndex])
+                {
+                    traversalQueue.enqueue(vertexIndex);
+                    visited[vertexIndex] = true;
+                }
+        }
+        return iter;
+    }
 
     public String toString(){
         return adj.toString();
@@ -199,7 +233,7 @@ public class HollywoodGraph<T> {
         //hollywood.graphBuilder("nextBechdel_castGender.txt");
         hollywood.graphBuilder("small_castGender.txt");
         //System.out.println(hollywood.toString());
-        System.out.println(hollywood.getMovies(("Tyler Perry")));
+        System.out.println(hollywood.getMovies(("Stella")));
 
 
         //hollywood.saveTGF("HollywoodGraph.tgf");
