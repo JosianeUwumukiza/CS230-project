@@ -11,6 +11,7 @@ import javafoundations.*;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 
 //*********************************************************************************************************
 //
@@ -143,19 +144,25 @@ public class HollywoodGraph<T> {
         } 
     }
     
-    public boolean indexIsValid(int m){
-        return m < actors.size();
+    public boolean validNames(String a1, String a2) {
+        return (names.contains(a1) && names.contains(a2));
     }
     
-    public ArrayIterator iteratorBFS(int startIndex)
+    public int getIndex(String a1) {
+        return names.indexOf(a1);
+    }
+    
+    public ArrayIterator iteratorBFS(int startIndex, int endIndex)
     {
         int currentVertex;
         LinkedQueue<Integer> traversalQueue = new
             LinkedQueue<Integer>();
         ArrayIterator<String> iter = new ArrayIterator<String>();
-        if (!indexIsValid(startIndex))
-            return iter;
+        //if (!indexIsValid(startIndex))
+           // return iter;
         boolean[] visited = new boolean[names.size()];
+        
+        //sets all vertex in path to false
         for (int vertexIndex = 0; vertexIndex < names.size();
         vertexIndex++)
             visited[vertexIndex] = false;
@@ -164,17 +171,37 @@ public class HollywoodGraph<T> {
         while (!traversalQueue.isEmpty())
         {
             currentVertex = traversalQueue.dequeue();
-            iter.add(names[currentVertex]);
+            iter.add(names.get(currentVertex));
             for (int vertexIndex = 0; vertexIndex < names.size();
             vertexIndex++)
-                if (adj[currentVertex][vertexIndex] &&
-                !visited[vertexIndex])
+                if (adj.isEdge(names.get(currentVertex), names.get(vertexIndex)) 
+                    && !visited[vertexIndex])
                 {
                     traversalQueue.enqueue(vertexIndex);
                     visited[vertexIndex] = true;
                 }
         }
         return iter;
+    }
+    
+    public boolean BFS(int startIndex, int endIndex) {
+        int v = names.size();
+        int[] pred = new int[v];//holds the predecessors
+        int[] dist = new int[v];//holds the distance
+        
+        //
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        
+    }
+    
+    public int movieSeparation(String a1, String a2) {
+        if (validNames(a1, a2)) {
+            int i1 = getIndex(a1);
+            int i2 = getIndex(a2);
+            ArrayIterator ai = iteratorBFS(i1, i2);
+        }
+        
+        return -1;
     }
 
     public String toString(){
@@ -233,7 +260,8 @@ public class HollywoodGraph<T> {
         //hollywood.graphBuilder("nextBechdel_castGender.txt");
         hollywood.graphBuilder("small_castGender.txt");
         //System.out.println(hollywood.toString());
-        System.out.println(hollywood.getMovies(("Stella")));
+        //System.out.println(hollywood.getMovies(("Stella")));
+        System.out.println(hollywood.iteratorBFS(0));
 
 
         //hollywood.saveTGF("HollywoodGraph.tgf");
