@@ -228,6 +228,29 @@ public class HollywoodGraph<T> {
         
         return -1;
     }
+    //finds the relationship between actors
+    boolean[] isVisited = new boolean[names.size()];
+    ArrayList<Integer> pathList = new ArrayList<>();
+    public int actorsRel(String a, String b){
+       
+        // add source to path
+        pathList.add(names.indexOf(a));
+        //check if it is the same actor
+        if(a.equals(b)){
+            return pathList.size()-1;
+        }
+        //Marck the current node
+        int node = names.indexOf(a);
+        isVisited[node]= true;
+        for (int i=node; i<names.size(); i++){
+            if(!isVisited[i]){
+                pathList.add(i);
+            }
+        }        
+        actorsRel(names.get(node+1), b);
+        return pathList.size()-1;
+        
+    }
 
     public String toString(){
         return adj.toString();
