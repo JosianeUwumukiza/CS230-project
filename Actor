@@ -63,6 +63,13 @@ public class Actor
         return movies;
     }
     
+    public String toString(){
+        String s = "Movies " + name + " is in: \n";
+        s += getMoviesList().toString();
+        return s;
+    
+    }
+
     /**
      * 
      */
