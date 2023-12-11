@@ -25,15 +25,20 @@ public class HollywoodGraph<T> {
     private AdjListsGraph<String> adj;
     private ArrayList<Movie> movies; //holds genders, create movie class
     private ArrayList<Actor> actors;
+    boolean[] isVisited;
+    ArrayList<Integer> pathList;
 
     public HollywoodGraph(){
         names = new ArrayList<String>();
         adj = new AdjListsGraph<String>();
         movies = new ArrayList<Movie>();
         actors = new ArrayList<Actor>();
+        pathList = new ArrayList<>();
     }
 
     public void graphBuilder(String fName){
+
+        
         try{
             Scanner scan = new Scanner (new File(fName)).useDelimiter(",");
 
@@ -64,7 +69,7 @@ public class HollywoodGraph<T> {
                 //System.out.println("List of Movies in movies: " + movies.toString());
                 //get next token for name
                 adj.addVertex(actor);
-                
+
                 //adding actor to movie arraylist object
                 //Movie m = new Movie(movie);
                 scan.next();
@@ -72,17 +77,16 @@ public class HollywoodGraph<T> {
                 scan.next();
                 scan.useDelimiter("\n");
                 String gender = scan.next().replace("\"", "").replace(",", "");
-                
+
                 Actor a = new Actor(actor,gender);
-                
-                
+
                 if(!names.contains(actor)){//if name is in vertex
                     names.add(actor);
                     actors.add(a);
                 }
 
                 //System.out.println("name"+ actor + " gender: " + gender);
-                
+
                 //adds movies to actor objects in arraylist 
                 for (int i = 0; i < actors.size(); i++){
                     if (actors.get(i).getActorName().equals(actor)){
@@ -91,7 +95,7 @@ public class HollywoodGraph<T> {
                         //System.out.println(movie);
                     }
                 }
-                
+
                 //adds actors to movie objects in arraylist 
                 for (int i = 0; i < movies.size(); i++){
                     if (movies.get(i).getMovieName().equals(movie)){
@@ -106,6 +110,20 @@ public class HollywoodGraph<T> {
         }catch(IOException ex){
             System.out.println(ex);
         }
+        
+        isVisited = new boolean[names.size()];
+        for (int i = 0; i< names.size(); i++){
+            isVisited[i] = false;
+        }
+    }
+
+    public String totalGenderAnalysis(){
+        String s = "";
+        for (int i = 0; i< movies.size(); i++){
+            s += "\n" + movies.get(i).getMovieName() + " has a cast that is over 48% female: " + genderAnalysis(movies.get(i).getMovieName());
+            s += "\nThe ratio is: " + movies.get(i).ratioInt();
+        }
+        return s;
     }
 
     public boolean genderAnalysis(String movieName){
@@ -121,7 +139,7 @@ public class HollywoodGraph<T> {
         } 
         return answer;
     }
-    
+
     public String getMovies(String a){
         String s = "";
         for (int i = 0; i < actors.size(); i++){
@@ -133,7 +151,7 @@ public class HollywoodGraph<T> {
         } 
         return s;
     }
-    
+
     public void getActors(String m) {
         for (int i = 0; i < movies.size(); i++){
             //System.out.println(movies.get(i).getName());
@@ -143,15 +161,15 @@ public class HollywoodGraph<T> {
             }
         } 
     }
-    
+
     public boolean validNames(String a1, String a2) {
         return (names.contains(a1) && names.contains(a2));
     }
-    
+
     public int getIndex(String a1) {
         return names.indexOf(a1);
     }
-    
+
     public ArrayIterator iteratorBFS(int startIndex, int endIndex)
     {
         int currentVertex;
@@ -159,9 +177,9 @@ public class HollywoodGraph<T> {
             LinkedQueue<Integer>();
         ArrayIterator<String> iter = new ArrayIterator<String>();
         //if (!indexIsValid(startIndex))
-           // return iter;
+        // return iter;
         boolean[] visited = new boolean[names.size()];
-        
+
         //sets all vertex in path to false
         for (int vertexIndex = 0; vertexIndex < names.size();
         vertexIndex++)
@@ -175,7 +193,7 @@ public class HollywoodGraph<T> {
             for (int vertexIndex = 0; vertexIndex < names.size();
             vertexIndex++)
                 if (adj.isEdge(names.get(currentVertex), names.get(vertexIndex)) 
-                    && !visited[vertexIndex])
+                && !visited[vertexIndex])
                 {
                     traversalQueue.enqueue(vertexIndex);
                     visited[vertexIndex] = true;
@@ -183,75 +201,106 @@ public class HollywoodGraph<T> {
         }
         return iter;
     }
-    
+
     public boolean BFS(int startIndex, int endIndex) {
         int v = names.size();
         int[] pred = new int[v];//holds the predecessors
         int[] dist = new int[v];//holds the distance
-        
+
         //
         LinkedList<Integer> queue = new LinkedList<Integer>();
-        
+
         boolean visited[] = new boolean[v];
-        
+
         if (startIndex == endIndex)
-        
-        for (int i = 0; i < v; i++) {
-            visited[i] = false;
-            dist[i] = Integer.MAX_VALUE;
-            pred[i] = -1;
-        }
-        
+
+            for (int i = 0; i < v; i++) {
+                visited[i] = false;
+                dist[i] = Integer.MAX_VALUE;
+                pred[i] = -1;
+            }
+
         visited[startIndex] = true;
         dist[startIndex] = 0;
         queue.add(startIndex);
-        
+
         while (!queue.isEmpty())
         {
             int u = queue.remove();
             for (int i = 0; i < names.size(); i++)
                 if (!visited[i])
                 {
-                    queue.add(vertexIndex);
-                    visited[vertexIndex] = true;
+                    //queue.add(vertexIndex);
+                    //visited[vertexIndex] = true;
                 }
         }
-        
+        return false;
     }
-    
+
     public int movieSeparation(String a1, String a2) {
         if (validNames(a1, a2)) {
             int i1 = getIndex(a1);
             int i2 = getIndex(a2);
             ArrayIterator ai = iteratorBFS(i1, i2);
         }
-        
+
         return -1;
     }
-    //finds the relationship between actors
-    boolean[] isVisited = new boolean[names.size()];
-    ArrayList<Integer> pathList = new ArrayList<>();
+    
     public int actorsRel(String a, String b){
-       
+
         // add source to path
         pathList.add(names.indexOf(a));
+        System.out.println(pathList);
         //check if it is the same actor
-        if(a.equals(b)){
+        int aIndex = names.indexOf(a);
+        int bIndex = names.indexOf(b);
+        if(aIndex == bIndex){
             return pathList.size()-1;
         }
         //Marck the current node
         int node = names.indexOf(a);
-        isVisited[node]= true;
+        //System.out.println(node);
+        //isVisited[node]= true;
         for (int i=node; i<names.size(); i++){
-            if(!isVisited[i]){
+            if(!pathList.contains(node)){
                 pathList.add(i);
+                //actorsRel(names.get(node+1), b);
             }
+            //actorsRel(names.get(node+1), b);
         }        
         actorsRel(names.get(node+1), b);
         return pathList.size()-1;
-        
-    }
 
+    }
+    
+    public int actorsRelative(String a, String b){
+
+        // add source to path
+        pathList.add(names.indexOf(a));
+        System.out.println(pathList);
+        //check if it is the same actor
+        int aIndex = names.indexOf(a);
+        int bIndex = names.indexOf(b);
+        if(aIndex == bIndex){
+            return pathList.size()-1;
+        }
+        //Marck the current node
+        int node = names.indexOf(a);
+        //System.out.println(node);
+        //isVisited[node]= true;
+        for (int i=node; i<names.size(); i++){
+            if(!pathList.contains(node)){
+                pathList.add(i);
+                //actorsRel(names.get(node+1), b);
+            }
+            //actorsRel(names.get(node+1), b);
+        }        
+        actorsRel(names.get(node+1), b);
+        return pathList.size()-1;
+
+    }
+    
     public String toString(){
         return adj.toString();
     }
@@ -301,17 +350,23 @@ public class HollywoodGraph<T> {
     public void saveTGF(String tgf_file_name){
         adj.saveTGF(tgf_file_name);
     }
-    
+
     public static void main(String[] args){
         HollywoodGraph<String> hollywood = new HollywoodGraph<String>();
 
-        //hollywood.graphBuilder("nextBechdel_castGender.txt");
-        hollywood.graphBuilder("small_castGender.txt");
+        //hollywood.graphBuilder("nextBechdel_castGender.txt"); //big file
+        hollywood.graphBuilder("small_castGender.txt"); //small file
         //System.out.println(hollywood.toString());
-        //System.out.println(hollywood.getMovies(("Stella")));
-        System.out.println(hollywood.iteratorBFS(0));
-
-
+        //hollywood.getActors("The Jungle Book"); //testing movies
+        //System.out.println(hollywood.getMovies(("Jennifer Lawrence"))); //testing actors
+        //System.out.println(hollywood.iteratorBFS(0));
+        //System.out.println(hollywood.totalGenderAnalysis());
+        System.out.println(hollywood.names);
+        //System.out.println(hollywood.names.indexOf("Tyler Perry"));
+        //System.out.println(hollywood.names.indexOf("Takis"));
+        //System.out.println(hollywood.names.indexOf(" Takis"));
+        System.out.println(hollywood.actorsRel("Tyler Perry","Takis"));
+        
         //hollywood.saveTGF("HollywoodGraph.tgf");
     }
 }
