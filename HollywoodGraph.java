@@ -192,6 +192,31 @@ public class HollywoodGraph<T> {
         //
         LinkedList<Integer> queue = new LinkedList<Integer>();
         
+        boolean visited[] = new boolean[v];
+        
+        if (startIndex == endIndex)
+        
+        for (int i = 0; i < v; i++) {
+            visited[i] = false;
+            dist[i] = Integer.MAX_VALUE;
+            pred[i] = -1;
+        }
+        
+        visited[startIndex] = true;
+        dist[startIndex] = 0;
+        queue.add(startIndex);
+        
+        while (!queue.isEmpty())
+        {
+            int u = queue.remove();
+            for (int i = 0; i < names.size(); i++)
+                if (!visited[i])
+                {
+                    queue.add(vertexIndex);
+                    visited[vertexIndex] = true;
+                }
+        }
+        
     }
     
     public int movieSeparation(String a1, String a2) {
