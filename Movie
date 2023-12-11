@@ -91,9 +91,14 @@ public class Movie
     {
         double ratio;
         ratio = fActors() / count;
-        System.out.println("ratio: "+ratio);
+        //System.out.println("ratio: "+ratio);
         return ratio > 0.48;
         }
+        
+    public double ratioInt(){
+        double ratio = fActors() / count;
+        return ratio;
+    }
         
     /**
      * Method to get string version of array list
@@ -117,6 +122,7 @@ public class Movie
     public double size(){
         return count;
     }
+    
     public static void main(String[] args){
         Movie m = new Movie("a");
         Actor b = new Actor("b","Male");
