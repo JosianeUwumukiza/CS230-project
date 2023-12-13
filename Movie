@@ -1,79 +1,67 @@
 import java.util.ArrayList;
 
 /**
- * Write a description of class Movie here.
+ * Represents a movie object that holds the name of the movie, a list of the
+ * actors in it, the number of actors, and the number of female actors.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Josiane, Lauren, Aubrey
+ * @version 12/13/23
  */
 public class Movie
 {
     private String title;
     private ArrayList<Actor> actors;
-    private double count;
-    private double fcount;
-    
- 
+    private double fCount;//count of female actors
+
     /**
      * Constructor for objects of class Movie
+     * 
+     * @param  title  the name of the movie
      */
     public Movie(String title)
     {
         this.title = title;
         actors = new ArrayList<Actor>();
-        count = 0;
-        fcount = 0;
+        fCount = 0;
     }
 
     /**
-     * Method to add actor to arrayList
+     * Method to add actor to arrayList of actors
      *
-     * @param  Actor, an object of an actor in the movie
-     * 
+     * @param  a  the actor to be added to the list of actors
      */
     public void addActor(Actor a)
     {
         actors.add(a);
-        count ++;
         if (a.isFemale()){
-            fcount++;
+            fCount++;
         }
     }
-    
+
     /**
-     * Method to add actor to arrayList
-     *
+     * Gets the number of actors in a movie
      * 
-     * @return  int, count of total actors
+     * @return  count of total actors
      */
     public double numOfActors()
     {
-        return count;
+        return actors.size();
     }
-    
+
     /**
-     * Method to return num of female actors 
+     * Method to get the number of female actors 
      *
-     * 
-     * @return   int, number of female actors 
+     * @return  the number of female actors 
      */
-    public double fActors()
+    public double getNumFemale()
     {
-        int num = 0;
-        
-        for (Actor a : actors){
-            if (a.isFemale()){
-                num ++;
-            }
-        }
-        return num;
+        return fCount;
     }
-    
-        /**
-     * Method to return name of movie
-     *
+
+    /**
+     * Method to get the name of the movie
      * 
-     * @return   string, name of movie
+     * @return  the title of the movie
      */
     public String getMovieName()
     {
@@ -81,48 +69,47 @@ public class Movie
     }
 
     /**
-     * Method to get female to actor ratio
-     * true if ratio of female actors greater than 48%
-     *
+     * Determines if the female actor to male actor ratio is >= 0.50, true if
+     * yes and false if no.
      * 
-     * @return boolean, if female actors > 0.48
+     * @return  true if female actors are greater than or equal to 50% of 
+     *  the cast
      */
     public boolean ratio()
     {
         double ratio;
-        ratio = fActors() / count;
+        ratio = fCount / numOfActors();
         //System.out.println("ratio: "+ratio);
-        return ratio > 0.48;
-        }
-        
-    public double ratioInt(){
-        double ratio = fActors() / count;
-        return ratio;
+        return ratio >= 0.50;
     }
-        
+
+    /**
+     * Determines if a given title is equal to a movie title
+     * 
+     * @param  m  the title to be checked
+     * @return  true if titles are the same and false otherwise
+     */
+    public boolean equals(String m){
+        return m == title;
+    }
+
     /**
      * Method to get string version of array list
-     *
      * 
-     * @return String, layout of arraylist
+     * @return  a string version of the movie
      */
     public String toString()
     {
         String s = "Actors in " + title + " : \n";
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < actors.size(); i++){
             s += actors.get(i).getActorName() + " " + actors.get(i).getGender() + "\n";
         }
         return s;
-        }
-    
-    public boolean equals(String m){
-        return m == title;
     }
-        
-    public double size(){
-        return count;
-    }
-    
+
+    /**
+     * Main tester for Movie class
+     */
     public static void main(String[] args){
         Movie m = new Movie("a");
         Actor b = new Actor("b","Male");
@@ -134,8 +121,8 @@ public class Movie
         m.addActor(a);
         m.addActor(a);
         m.addActor(a);
-        
+
         System.out.println(m.ratio());
-        
+
     }
 }
