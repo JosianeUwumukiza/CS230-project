@@ -261,7 +261,7 @@ public class HollywoodGraph<T> {
 
     public int getRel1(String a, String b) {
         if (a.equals(b)) {
-            return degreeCount; //returns degrees apart if inputted actors are the same 
+            return -1; //returns -1 if inputted actors are the same 
         } else {
             degreeCount++;
             for (int i = 0; i < actors.size(); i++) { 
@@ -293,7 +293,7 @@ public class HollywoodGraph<T> {
                 return getRel1(actorInMovie.getActorName(), b);
             }
 
-            return -1; // no connection
+            return -2; // no connection
         }
     }
 
