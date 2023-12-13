@@ -1,0 +1,126 @@
+bechdelProject_TestingActor: 
+Movies Jennifer Lawrence is in: 
+[X-Men: Apocalypse, Passengers]
+
+
+bechdelProject_TestingMovie:
+Actors in The Jungle Book : 
+Bill Murray Male
+Ben Kingsley Male
+Idris Elba Male
+Lupita Nyong'o Female
+Scarlett Johansson Female
+Giancarlo Esposito Male
+Christopher Walken Male
+Neel Sethi Male
+Garry Shandling Male
+Brighton Rose Unknown
+Jon Favreau Male
+
+
+ratio_testing:
+Boo! A Madea Halloween has a cast that is over 48% female: false
+The ratio is: 0.19047619047619047
+Hidden Figures has a cast that is over 48% female: false
+The ratio is: 0.3333333333333333
+Sully has a cast that is over 48% female: false
+The ratio is: 0.2459016393442623
+The Girl on the Train has a cast that is over 48% female: false
+The ratio is: 0.35
+Don't Breathe has a cast that is over 48% female: true
+The ratio is: 0.5
+10 Cloverfield Lane has a cast that is over 48% female: false
+The ratio is: 0.3
+Bad Moms has a cast that is over 48% female: true
+The ratio is: 0.625
+La La Land has a cast that is over 48% female: false
+The ratio is: 0.40816326530612246
+Arrival has a cast that is over 48% female: false
+The ratio is: 0.35
+Storks has a cast that is over 48% female: false
+The ratio is: 0.28
+Hacksaw Ridge has a cast that is over 48% female: false
+The ratio is: 0.05555555555555555
+Star Trek Beyond has a cast that is over 48% female: false
+The ratio is: 0.2608695652173913
+Pete's Dragon has a cast that is over 48% female: false
+The ratio is: 0.2682926829268293
+Sing has a cast that is over 48% female: false
+The ratio is: 0.2909090909090909
+The Purge: Election Year has a cast that is over 48% female: false
+The ratio is: 0.2682926829268293
+The Boss has a cast that is over 48% female: true
+The ratio is: 0.4864864864864865
+The Magnificent Seven has a cast that is over 48% female: false
+The ratio is: 0.0625
+Zootopia has a cast that is over 48% female: false
+The ratio is: 0.3125
+Doctor Strange has a cast that is over 48% female: false
+The ratio is: 0.27586206896551724
+The Accountant has a cast that is over 48% female: false
+The ratio is: 0.2413793103448276
+Suicide Squad has a cast that is over 48% female: false
+The ratio is: 0.18518518518518517
+Now You See Me 2 has a cast that is over 48% female: false
+The ratio is: 0.25
+Teenage Mutant Ninja Turtles: Out of the Shadows has a cast that is over 48% female: false
+The ratio is: 0.21739130434782608
+Lights Out has a cast that is over 48% female: true
+The ratio is: 0.7142857142857143
+Rogue One: A Star Wars Story has a cast that is over 48% female: false
+The ratio is: 0.18181818181818182
+Fantastic Beasts and Where to Find Them has a cast that is over 48% female: false
+The ratio is: 0.26229508196721313
+Sausage Party has a cast that is over 48% female: false
+The ratio is: 0.24242424242424243
+Ride Along 2 has a cast that is over 48% female: false
+The ratio is: 0.3
+The Conjuring 2: The Enfield Poltergeist has a cast that is over 48% female: false
+The ratio is: 0.46875
+The Legend of Tarzan has a cast that is over 48% female: false
+The ratio is: 0.1724137931034483
+Captain America: Civil War has a cast that is over 48% female: false
+The ratio is: 0.23076923076923078
+The Divergent Series: Allegiant has a cast that is over 48% female: false
+The ratio is: 0.3956043956043956
+Ice Age: Collision Course has a cast that is over 48% female: false
+The ratio is: 0.3333333333333333
+Jason Bourne has a cast that is over 48% female: false
+The ratio is: 0.13953488372093023
+X-Men: Apocalypse has a cast that is over 48% female: false
+The ratio is: 0.2
+Alice Through the Looking Glass has a cast that is over 48% female: false
+The ratio is: 0.391304347826087
+The Jungle Book has a cast that is over 48% female: false
+The ratio is: 0.18181818181818182
+Batman v Superman: Dawn of Justice has a cast that is over 48% female: false
+The ratio is: 0.29508196721311475
+Moana has a cast that is over 48% female: false
+The ratio is: 0.42857142857142855
+Miss Peregrine's Home for Peculiar Children has a cast that is over 48% female: false
+The ratio is: 0.3018867924528302
+Independence Day: Resurgence has a cast that is over 48% female: false
+The ratio is: 0.2857142857142857
+The Angry Birds Movie has a cast that is over 48% female: false
+The ratio is: 0.3617021276595745
+The Secret Life of Pets has a cast that is over 48% female: false
+The ratio is: 0.1935483870967742
+Finding Dory has a cast that is over 48% female: false
+The ratio is: 0.2857142857142857
+Kung Fu Panda 3 has a cast that is over 48% female: false
+The ratio is: 0.25
+Trolls has a cast that is over 48% female: false
+The ratio is: 0.46875
+Passengers has a cast that is over 48% female: false
+The ratio is: 0.4074074074074074
+Ghostbusters has a cast that is over 48% female: false
+The ratio is: 0.2962962962962963
+Deadpool has a cast that is over 48% female: false
+The ratio is: 0.3235294117647059
+Central Intelligence has a cast that is over 48% female: false
+The ratio is: 0.16
+
+
+Degrees of Separation between Tyler Perry and Tyler Perry, should be -1 (same person): -1
+Degrees of Separation between Tyler Perry and Megan Fox, should be 0 (shared movie): 0
+Degrees of Separation between Tyler Perry and Nick Arapoglou: null
