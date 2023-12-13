@@ -1,19 +1,23 @@
 import java.util.ArrayList;
 
 /**
- * Write a description of class Actor here.
+ * An actor object that holds the actors name, gender, and a list of movies
+ * they are in
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Josiane, Lauren, Aubrey
+ * @version 12/13/23
  */
 public class Actor
 {
     private String gender; 
     private String name;
     private ArrayList<String> movies;
-     
+
     /**
      * Constructor for objects of class Actor
+     * 
+     * @param  name  the name of the actor
+     * @param  gender  the gender of the actor
      */
     public Actor(String name, String gender)
     {
@@ -21,12 +25,11 @@ public class Actor
         this.name = name;
         movies = new ArrayList();
     }
-    
+
     /**
-     * Returns name of actor
-     *
+     * Gets the name of the actor
      * 
-     * @return  String, name of actor
+     * @return  name of actor
      */
     public String getActorName()
     {
@@ -34,59 +37,66 @@ public class Actor
     }
 
     /**
-     * Returns int based on gender of actor: 0=male, 1=female, 2=other
-     *
+     * Gets the gender of an actor
      * 
-     * @return   int, num of gender of actor 
+     * @return  gender of actor 
      */
     public String getGender()
     {
         return gender;
     }
-    
+
     /**
-     * Returns boolean based on if actor is femaile
+     * Gets if the actor is female or not
      *
-     * 
-     * @return   boolean, num of gender of actorif actor is female
-    */
+     * @return  true if actor is female, false otherwise
+     */
     public boolean isFemale()
     {
         return gender.equals("Female");
     }
-    
-        
+
     /**
-     * returns the list of movies that an actor played.
+     * Gets the list of movies an actor is in
+     * 
+     * @return the list of movies an actor is in
      */
     public ArrayList<String> getMoviesList(){
         return movies;
     }
-    
+
+    /**
+     * Adds a movie to the actors list of movies
+     * 
+     * @param  m  the name of the movie to be added to the list
+     */
+    public void addMovies(String m){
+        movies.add(m);
+    }
+
+    /**
+     * Turns an actor into a String format
+     * 
+     * @return  all the movies the actor is in
+     */
     public String toString(){
         String s = "Movies " + name + " is in: \n";
         s += getMoviesList().toString();
         return s;
-    
+
     }
 
     /**
-     * 
+     * Main tester for Actor class
      */
-    public void addMovies(String B){
-        movies.add(B);
-    }
-    
     public static void main(String[] args){
         Actor a = new Actor("a","Female");
         Actor b = new Actor("b","Male");
-        
+
         System.out.println(a.isFemale());
         System.out.println(a.getGender());
-        
+
         System.out.println(b.isFemale());
         System.out.println(b.getGender());
     }
-    
-    
 }
