@@ -26,6 +26,15 @@ public class Movie
     }
 
     /**
+     * Method to return all actor objects of the movie
+     *
+     * @return  all actor objects in this movie
+     */
+    public ArrayList<Actor> getAllActors(){
+        return actors;
+    }
+
+    /**
      * Method to add actor to arrayList of actors
      *
      * @param  a  the actor to be added to the list of actors
