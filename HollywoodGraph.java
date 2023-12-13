@@ -25,8 +25,13 @@ public class HollywoodGraph<T> {
     private AdjListsGraph<String> adj;
     private ArrayList<Movie> movies; //holds genders, create movie class
     private ArrayList<Actor> actors;
-    boolean[] isVisited;
-    ArrayList<Integer> pathList;
+    private boolean[] isVisited;
+    private ArrayList<Integer> pathList;
+    private int degreeCount;
+    private ArrayList<String> pathList1;
+    private int movCount;
+    private int actCount;
+    private Actor actorObj;
 
     public HollywoodGraph(){
         names = new ArrayList<String>();
@@ -34,11 +39,14 @@ public class HollywoodGraph<T> {
         movies = new ArrayList<Movie>();
         actors = new ArrayList<Actor>();
         pathList = new ArrayList<>();
+        degreeCount = 0;
+        pathList1 = new ArrayList<>();
+        movCount = 0;
+        actCount = 0;
+        actorObj = null;
     }
 
     public void graphBuilder(String fName){
-
-        
         try{
             Scanner scan = new Scanner (new File(fName)).useDelimiter(",");
 
@@ -110,7 +118,7 @@ public class HollywoodGraph<T> {
         }catch(IOException ex){
             System.out.println(ex);
         }
-        
+
         isVisited = new boolean[names.size()];
         for (int i = 0; i< names.size(); i++){
             isVisited[i] = false;
@@ -157,7 +165,7 @@ public class HollywoodGraph<T> {
             //System.out.println(movies.get(i).getName());
             if (movies.get(i).getMovieName().equals(m)){
                 //System.out.println("selected movie: " + movies.get(i).getName());
-                System.out.println(movies.get(i).toString());
+                //return movies.get(i).toString();
             }
         } 
     }
@@ -166,7 +174,7 @@ public class HollywoodGraph<T> {
         return (names.contains(a1) && names.contains(a2));
     }
 
-    public int getIndex(String a1) {
+    public int getIndex1(String a1) {
         return names.indexOf(a1);
     }
 
@@ -246,9 +254,8 @@ public class HollywoodGraph<T> {
 
         return -1;
     }
-    
+
     public int actorsRel(String a, String b){
-
         // add source to path
         pathList.add(names.indexOf(a));
         System.out.println(pathList);
@@ -273,34 +280,7 @@ public class HollywoodGraph<T> {
         return pathList.size()-1;
 
     }
-    
-    public int actorsRelative(String a, String b){
 
-        // add source to path
-        pathList.add(names.indexOf(a));
-        System.out.println(pathList);
-        //check if it is the same actor
-        int aIndex = names.indexOf(a);
-        int bIndex = names.indexOf(b);
-        if(aIndex == bIndex){
-            return pathList.size()-1;
-        }
-        //Marck the current node
-        int node = names.indexOf(a);
-        //System.out.println(node);
-        //isVisited[node]= true;
-        for (int i=node; i<names.size(); i++){
-            if(!pathList.contains(node)){
-                pathList.add(i);
-                //actorsRel(names.get(node+1), b);
-            }
-            //actorsRel(names.get(node+1), b);
-        }        
-        actorsRel(names.get(node+1), b);
-        return pathList.size()-1;
-
-    }
-    
     public String toString(){
         return adj.toString();
     }
@@ -351,6 +331,95 @@ public class HollywoodGraph<T> {
         adj.saveTGF(tgf_file_name);
     }
 
+    public Movie getMovieObj(String movie){
+        for (int i = 0; i < movies.size(); i++){
+            if (movies.get(i).getMovieName().equals(movie)){
+                return movies.get(i);
+            }
+        } 
+        return null;
+    }
+
+    public Actor getActorObj(String actor){
+        for (int i = 0; i < actors.size(); i++){
+            if (actors.get(i).getActorName().equals(actor)){
+                return actors.get(i);
+            }
+        } 
+        return null;
+    }
+
+    public int getRel(String a, String b){
+        if (a.equals(b)){
+            return degreeCount;
+        }else{
+            degreeCount ++;
+            for(int i = 0; i<actors.size(); i++){
+                if(actors.get(i).getActorName().equals(a)){
+                    ArrayList<String> mov = new ArrayList<String>();
+                    mov = actors.get(i).getMoviesList();
+                    for(int x = 0; x <mov.size(); x++){
+                        if(adj.isEdge(mov.get(x),b) && !pathList1.contains(mov.get(x))){
+                            pathList1.add(mov.get(x));
+                            return degreeCount;
+                        }
+                    }
+                }
+            }
+        }
+
+        //a = getMovieObj(a).getActorObj(mov.get(x));
+        getRel(a,b);
+        return -1; //no connection
+    }
+
+    public int getIndex(String actorName) {
+        for (int i = 0; i < actors.size(); i++) {
+            if (actors.get(i).getActorName().equals(actorName)) {
+                return i;
+            }
+        }
+        return -1; // Return -1 if the actor is not found
+    }
+
+    public int getRel1(String a, String b) {
+        if (a.equals(b)) {
+            return degreeCount; //returns degrees apart if inputted actors are the same 
+        } else {
+            degreeCount++;
+            for (int i = 0; i < actors.size(); i++) { 
+                if (actors.get(i).getActorName().equals(a)) { //getting the actor object
+                    actorObj = getActorObj(actors.get(i).getActorName());
+                    ArrayList<String> mov = actors.get(i).getMoviesList(); //getting the list of movies associated with the actor
+                    for (int x = 0; x < mov.size(); x++) { //cycling through the actor's movies
+                        if (adj.isEdge(mov.get(x), b)) { //checking if actor b is in any of actor a's movies
+                            // conditionals: if there is an edge
+                            //removed:  from conditional && !pathList1.contains(mov.get(x))
+                            //removed: pathList1.add(mov.get(x));
+                            return degreeCount; //exits out, returns number of degrees apart
+                        }
+                    }
+                }
+            }
+            //getting the first movie that the actor is in
+            //System.out.println(a);
+            int num = actors.indexOf(actorObj);
+            //System.out.println(names);
+            //System.out.println(num);
+            ArrayList<String> mov = actors.get(num).getMoviesList(); 
+            String firstMovA = mov.get(movCount); //maybe implement a counter to go through the actor's movie list
+            //int movieIndex = getMovieObj(a).getIndex(b); 
+            movCount ++;
+            if (movCount != -1) {
+                Actor actorInMovie = getMovieObj(firstMovA).getAllActors().get(actCount); //gets x actor in movie based on global counter
+                actCount ++;
+                return getRel1(actorInMovie.getActorName(), b);
+            }
+
+            return -1; // no connection
+        }
+    }
+
     public static void main(String[] args){
         HollywoodGraph<String> hollywood = new HollywoodGraph<String>();
 
@@ -361,12 +430,12 @@ public class HollywoodGraph<T> {
         //System.out.println(hollywood.getMovies(("Jennifer Lawrence"))); //testing actors
         //System.out.println(hollywood.iteratorBFS(0));
         //System.out.println(hollywood.totalGenderAnalysis());
-        System.out.println(hollywood.names);
+        //System.out.println(hollywood.names);
         //System.out.println(hollywood.names.indexOf("Tyler Perry"));
         //System.out.println(hollywood.names.indexOf("Takis"));
         //System.out.println(hollywood.names.indexOf(" Takis"));
-        System.out.println(hollywood.actorsRel("Tyler Perry","Takis"));
-        
+        System.out.println(hollywood.getRel1("Tyler Perry","Takis"));
+
         //hollywood.saveTGF("HollywoodGraph.tgf");
     }
 }
