@@ -45,7 +45,11 @@ public class HollywoodGraph<T> {
         actCount = 0;
         actorObj = null;
     }
-
+/**
+*graphBuilder reads a text file and creates an adjListsGraph object.
+*@param fName - the text file with movies and their actors
+*@return s - the undirected graph of relationships between movies and actors
+*/
     public void graphBuilder(String fName){
         try{
             Scanner scan = new Scanner (new File(fName)).useDelimiter(",");
@@ -178,109 +182,6 @@ public class HollywoodGraph<T> {
         return names.indexOf(a1);
     }
 
-    public ArrayIterator iteratorBFS(int startIndex, int endIndex)
-    {
-        int currentVertex;
-        LinkedQueue<Integer> traversalQueue = new
-            LinkedQueue<Integer>();
-        ArrayIterator<String> iter = new ArrayIterator<String>();
-        //if (!indexIsValid(startIndex))
-        // return iter;
-        boolean[] visited = new boolean[names.size()];
-
-        //sets all vertex in path to false
-        for (int vertexIndex = 0; vertexIndex < names.size();
-        vertexIndex++)
-            visited[vertexIndex] = false;
-        traversalQueue.enqueue(startIndex);
-        visited[startIndex] = true;
-        while (!traversalQueue.isEmpty())
-        {
-            currentVertex = traversalQueue.dequeue();
-            iter.add(names.get(currentVertex));
-            for (int vertexIndex = 0; vertexIndex < names.size();
-            vertexIndex++)
-                if (adj.isEdge(names.get(currentVertex), names.get(vertexIndex)) 
-                && !visited[vertexIndex])
-                {
-                    traversalQueue.enqueue(vertexIndex);
-                    visited[vertexIndex] = true;
-                }
-        }
-        return iter;
-    }
-
-    public boolean BFS(int startIndex, int endIndex) {
-        int v = names.size();
-        int[] pred = new int[v];//holds the predecessors
-        int[] dist = new int[v];//holds the distance
-
-        //
-        LinkedList<Integer> queue = new LinkedList<Integer>();
-
-        boolean visited[] = new boolean[v];
-
-        if (startIndex == endIndex)
-
-            for (int i = 0; i < v; i++) {
-                visited[i] = false;
-                dist[i] = Integer.MAX_VALUE;
-                pred[i] = -1;
-            }
-
-        visited[startIndex] = true;
-        dist[startIndex] = 0;
-        queue.add(startIndex);
-
-        while (!queue.isEmpty())
-        {
-            int u = queue.remove();
-            for (int i = 0; i < names.size(); i++)
-                if (!visited[i])
-                {
-                    //queue.add(vertexIndex);
-                    //visited[vertexIndex] = true;
-                }
-        }
-        return false;
-    }
-
-    public int movieSeparation(String a1, String a2) {
-        if (validNames(a1, a2)) {
-            int i1 = getIndex(a1);
-            int i2 = getIndex(a2);
-            ArrayIterator ai = iteratorBFS(i1, i2);
-        }
-
-        return -1;
-    }
-
-    public int actorsRel(String a, String b){
-        // add source to path
-        pathList.add(names.indexOf(a));
-        System.out.println(pathList);
-        //check if it is the same actor
-        int aIndex = names.indexOf(a);
-        int bIndex = names.indexOf(b);
-        if(aIndex == bIndex){
-            return pathList.size()-1;
-        }
-        //Marck the current node
-        int node = names.indexOf(a);
-        //System.out.println(node);
-        //isVisited[node]= true;
-        for (int i=node; i<names.size(); i++){
-            if(!pathList.contains(node)){
-                pathList.add(i);
-                //actorsRel(names.get(node+1), b);
-            }
-            //actorsRel(names.get(node+1), b);
-        }        
-        actorsRel(names.get(node+1), b);
-        return pathList.size()-1;
-
-    }
-
     public String toString(){
         return adj.toString();
     }
@@ -347,30 +248,6 @@ public class HollywoodGraph<T> {
             }
         } 
         return null;
-    }
-
-    public int getRel(String a, String b){
-        if (a.equals(b)){
-            return degreeCount;
-        }else{
-            degreeCount ++;
-            for(int i = 0; i<actors.size(); i++){
-                if(actors.get(i).getActorName().equals(a)){
-                    ArrayList<String> mov = new ArrayList<String>();
-                    mov = actors.get(i).getMoviesList();
-                    for(int x = 0; x <mov.size(); x++){
-                        if(adj.isEdge(mov.get(x),b) && !pathList1.contains(mov.get(x))){
-                            pathList1.add(mov.get(x));
-                            return degreeCount;
-                        }
-                    }
-                }
-            }
-        }
-
-        //a = getMovieObj(a).getActorObj(mov.get(x));
-        getRel(a,b);
-        return -1; //no connection
     }
 
     public int getIndex(String actorName) {
